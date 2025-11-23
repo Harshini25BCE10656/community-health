@@ -1,0 +1,78 @@
+def get_community_health_measures(condition):
+    condition = condition.lower().strip()
+
+    health_measures = {
+        'covid-19': [
+            "Promote vaccination and booster shots for all eligible individuals.",
+            "Encourage wearing masks in crowded indoor public settings.",
+            "Advise frequent handwashing with soap and water or using hand sanitizer.",
+            "Recommend physical distancing from others outside your household.",
+            "Promote good ventilation in indoor spaces.",
+            "Advise isolation for individuals who test positive or show symptoms."
+        ],
+        'influenza': [
+            "Promote annual flu vaccination campaigns, especially before flu season peaks.",
+            "Encourage covering coughs and sneezes with a tissue or elbow.",
+            "Advise individuals with flu symptoms to stay home from work/school to prevent spread.",
+            "Increase awareness about cleaning and disinfecting frequently touched surfaces.",
+            "Provide information on the importance of rest and hydration for recovery."
+        ],
+        'cholera': [
+            "Ensure access to safe drinking water; promote boiling water if the source is contaminated.",
+            "Advise strict personal hygiene practices, especially handwashing after using the toilet and before eating.",
+            "Promote proper sanitation and waste disposal systems in the community.",
+            "Raise awareness about food safety and avoiding raw or undercooked foods.",
+            "Educate the community on oral rehydration solutions for treating severe diarrhea."
+        ],
+        'heat stroke': [
+            "Issue heat warnings and establish community cooling centers during extreme heat events.",
+            "Advise residents to stay hydrated by drinking plenty of water, even if not thirsty.",
+            "Encourage avoiding strenuous outdoor activities during the hottest parts of the day.",
+            "Promote wearing light-colored, loose-fitting clothing and hats when outdoors.",
+            "Raise awareness about checking on vulnerable neighbors (e.g., elderly, young children)."
+        ]
+    }
+
+    measures = health_measures.get(condition)
+
+    if measures:
+        return measures
+    else:
+        return [
+            f"No specific community health measures found for '{condition}'.",
+            "General advice: follow standard hygiene practices and consult local health authorities for guidance."
+        ]
+
+
+def main():
+    health_conditions = ["covid-19", "influenza", "cholera", "heat stroke"]
+
+    print("Community Health Advisor")
+    print("-" * 30)
+
+    while True:
+        print("\nAvailable conditions:")
+        for cond in health_conditions:
+            print(f"- {cond}")
+
+        user_condition = input(
+            "\nEnter the name of the disease or health condition (or type 'exit' to quit): "
+        ).strip()
+
+        if not user_condition:
+            print("You did not enter anything. Please type a condition name.")
+            continue
+
+        if user_condition.lower() == "exit":
+            print("Exiting the program. Stay healthy!")
+            break
+
+        precautions = get_community_health_measures(user_condition)
+
+        print(f"\nMeasures for {user_condition}:")
+        for measure in precautions:
+            print(f"* {measure}")
+
+
+if __name__ == "__main__":
+    main()
